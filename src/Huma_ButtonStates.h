@@ -21,11 +21,11 @@ public:
 
 public:
   /* Getter */
-  bool clicked() { return _clicked; }
-  uint8_t pin() { return _pin; }
-  HumaButtonStates_e state() { return _state; }
-  unsigned long long state_time() { return _state_time; }
-  unsigned long long clicked_time() { return _clicked_time; }
+  bool clicked() const { return _clicked; }
+  uint8_t pin() const { return _pin; }
+  HumaButtonStates_e state() const { return _state; }
+  unsigned long long state_time() const { return _state_time; }
+  unsigned long long clicked_time() const { return _clicked_time; }
 
   /* Setter */
   void setClicked(bool val) { _clicked = val; }
