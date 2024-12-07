@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map for Huma_Buttons
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Huma_Buttons	KEYWORD1
+HumaButtonStates_st	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+add	KEYWORD2
+remove	KEYWORD2
+pressedTime	KEYWORD2
+clicked	KEYWORD2
+state	KEYWORD2
+setDebounce	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+HUMA_RELEASED	LITERAL1
+HUMA_PRESSED	LITERAL1
+HUMA_CLICKED	LITERAL1
