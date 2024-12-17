@@ -16,6 +16,7 @@ add	KEYWORD2
 remove	KEYWORD2
 pressedTime	KEYWORD2
 clicked	KEYWORD2
+hold	KEYWORD2
 state	KEYWORD2
 setDebounce	KEYWORD2
 

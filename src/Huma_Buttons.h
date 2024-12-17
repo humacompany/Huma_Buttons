@@ -57,6 +57,14 @@ public:
   bool clicked(uint8_t btn_pin);
 
   /*!
+   * @brief Check if a button is pressed and held for a specific period
+   * @param btn_pin Pin number
+   * @return true if button is just pressed and held for a given period
+   *         false if button is pressed and help within a given period
+   */
+  bool hold(uint8_t btn_pin, uint16_t period);
+
+  /*!
    * @brief Get current button's state
    * @param btn_pin Pin number
    * @return Current button's sate

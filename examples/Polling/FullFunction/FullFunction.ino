@@ -32,6 +32,7 @@ void setup()
 
 void loop()
 {
+  static bool btn_hold = false;
   static HumaButtonStates_e prev_1_state = HUMA_RELEASED;
   HumaButtonStates_e current_state = HUMA_RELEASED;
 
@@ -54,4 +55,15 @@ void loop()
     prev_1_state = current_state;
   }
 
+  /* Check if button is pressed and held for 3 seconds */
+  if ( ! btn_hold) {
+    if (Huma_Buttons.hold(BTN_1_PIN, 3000)) {
+      Serial.println("Button 1 pressed for 3 seconds");
+      btn_hold = true;
+    }
+  } else {
+    if (current_state == HUMA_RELEASED) {
+      btn_hold = false;
+    }
+  }
 }

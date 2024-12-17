@@ -130,6 +130,12 @@ bool Huma_ButtonClass::clicked(uint8_t btn_pin)
   return isClicked;
 }
 
+bool Huma_ButtonClass::hold(uint8_t btn_pin, uint16_t period)
+{
+  HumaButtonStates *btn = LocalGetButton(btn_pin);
+  return (btn && (btn->state() == HUMA_PRESSED) && (millis() - btn->state_time() >= period));
+}
+
 HumaButtonStates_e Huma_ButtonClass::state(uint8_t btn_pin)
 {
   HumaButtonStates_e state = HUMA_RELEASED;
