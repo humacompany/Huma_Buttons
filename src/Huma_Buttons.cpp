@@ -1,6 +1,7 @@
 #include "Huma_Buttons.h"
 
-static uint16_t g_humaBtnDebounceTime = BTN_DEBOUNCE_TIME;
+static uint16_t g_humaBtnDebounceTime = HUMA_BTN_DEBOUNCE_TIME;
+static uint16_t g_BtnStartLongPress = HUMA_BTN_START_LONG_PRESS;
 
 /*!
   * @brief Rising edge ISR Handler
@@ -12,8 +13,10 @@ void IRAM_ATTR humaBtnRisingIsr(HumaButtonStates *btn)
   if (btn && btn->state() == HUMA_PRESSED) {
     unsigned long long t = millis();
     if ((t - btn->state_time()) > g_humaBtnDebounceTime) {
-      btn->setClicked(true);
-      btn->setClickedTime(t);
+      if (((t - btn->state_time()) <= g_BtnStartLongPress) || btn->longPressClicked()) {
+        btn->setClicked(true);
+        btn->setClickedTime(t);
+      }
       btn->setState(HUMA_RELEASED);
       btn->setStateTime(t);
     }
@@ -53,7 +56,7 @@ void IRAM_ATTR humaBtnIsr(void *param) {
 Huma_ButtonClass::Huma_ButtonClass(uint16_t debounce)
 {
   _buttonNum = 0;
-  _clickedRemainTime = BTN_CLICKED_REMAIN_TIME;
+  _clickedRemainTime = HUMA_BTN_CLICKED_REMAIN_TIME;
   g_humaBtnDebounceTime = debounce;
 }
 
@@ -92,7 +95,7 @@ bool Huma_ButtonClass::remove(byte btn_pin)
         memmove(&btns[i], &btns[i + 1], (_buttonNum - i - 1) * sizeof(HumaButtonStates *));
       }
       
-      free(btn);
+      delete btn;
       _buttonNum--;
       ret = true;
       break;
@@ -122,9 +125,9 @@ bool Huma_ButtonClass::clicked(uint8_t btn_pin)
   if (btn && btn->clicked()) {
     if (millis() - btn->clicked_time() <= _clickedRemainTime) {
       isClicked = true;
-      btn->setClicked(false); //Reset state
-      btn->setClickedTime(0);
     }
+    btn->setClicked(false); //Reset state
+    btn->setClickedTime(0);
   }
 
   return isClicked;
@@ -150,6 +153,14 @@ HumaButtonStates_e Huma_ButtonClass::state(uint8_t btn_pin)
 void Huma_ButtonClass::setDebounce(uint16_t debounce)
 {
   g_humaBtnDebounceTime = debounce;
+}
+
+void Huma_ButtonClass::setLongPressClicked(uint8_t btn_pin, bool val)
+{
+  HumaButtonStates *btn = LocalGetButton(btn_pin);
+  if (btn) {
+    btn->setLongPressClicked(val);
+  }
 }
 
 HumaButtonStates *Huma_ButtonClass::LocalGetButton(byte btn_pin)

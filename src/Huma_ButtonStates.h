@@ -13,6 +13,7 @@ class HumaButtonStates
 public:
   HumaButtonStates(byte pin = 0) {
     _clicked = false;
+    _longPressClicked = false;
     _state = HUMA_RELEASED;
     _pin = pin;
     _state_time = _clicked_time = 0;
@@ -22,6 +23,7 @@ public:
 public:
   /* Getter */
   bool clicked() const { return _clicked; }
+  bool longPressClicked() const { return _longPressClicked; }
   uint8_t pin() const { return _pin; }
   HumaButtonStates_e state() const { return _state; }
   unsigned long long state_time() const { return _state_time; }
@@ -29,6 +31,7 @@ public:
 
   /* Setter */
   void setClicked(bool val) { _clicked = val; }
+  void setLongPressClicked(bool val ) { _longPressClicked = val; }
   void setPin(uint8_t pin) { _pin = pin; }
   void setState(HumaButtonStates_e stt) { _state = stt; };
   void setStateTime(unsigned long long t) { _state_time = t; }
@@ -36,6 +39,7 @@ public:
 
 private:
   bool               _clicked;
+  bool               _longPressClicked;
   uint8_t            _pin;
   HumaButtonStates_e _state;
   unsigned long long _state_time;

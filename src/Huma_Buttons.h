@@ -3,8 +3,9 @@
 #include <Arduino.h>
 #include <Huma_ButtonStates.h>
 
-#define BTN_CLICKED_REMAIN_TIME       500   //ms
-#define BTN_DEBOUNCE_TIME             30    //ms
+#define HUMA_BTN_CLICKED_REMAIN_TIME  500   //ms
+#define HUMA_BTN_DEBOUNCE_TIME        30    //ms
+#define HUMA_BTN_START_LONG_PRESS     500   //ms
 #define HUMA_BUTTONS_MAX              40    //Maximum number of buttons
 
 class Huma_ButtonClass
@@ -15,7 +16,7 @@ public:
    * @param debounce debounce time for all buttons 
    * @return N/A
    */
-  Huma_ButtonClass(uint16_t debounce = BTN_DEBOUNCE_TIME);
+  Huma_ButtonClass(uint16_t debounce = HUMA_BTN_DEBOUNCE_TIME);
 
   /*!
    * @brief Destructor
@@ -80,6 +81,14 @@ public:
    */
   void setDebounce(uint16_t debounce);
 
+  /*!
+  * @brief Set Long Press Clicked config
+           If set, release a long pressed button will trigger clicked event
+           If not set (default), release a long pressed button will NOT ftrigger clicked event
+   * @param bool value to set. true to set / false to unset
+   * @return N/A
+  */
+  void setLongPressClicked(uint8_t btn_pin, bool val);
 private:
   /*!
    * @brief Get button object by button pin

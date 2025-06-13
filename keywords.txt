@@ -19,6 +19,7 @@ clicked	KEYWORD2
 hold	KEYWORD2
 state	KEYWORD2
 setDebounce	KEYWORD2
+setLongPressClicked	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

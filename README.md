@@ -18,6 +18,7 @@ If the pin has no internal pullup resistor, please add an external pullup resist
 * `bool clicked(uint8_t btn_pin)`: Check if a button is clicked
 * `HumaButtonStates_e state(uint8_t btn_pin)`: Get current button's state
 * `void setDebounce(uint16_t debounce)`: Set debounce time for all buttons. Default is 30ms
+* `void setLongPressClicked(uint8_t btn_pin, bool val)`: Set Long Press Clicked config
 
 # Contacts
 
